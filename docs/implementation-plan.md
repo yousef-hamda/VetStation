@@ -2,6 +2,8 @@
 
 This plan begins after the project decisions are confirmed. Each phase should have a deployable, reviewable result.
 
+The local homepage prototype was added on 2026-11-06 using Vite and TypeScript; it does not select the eventual operations platform architecture or complete the phases below.
+
 1. **Application scaffold:** choose framework and package manager; add formatting, linting, type checks, test tooling, CI, and environment validation.
 2. **Design foundation:** brand assets, responsive layout, accessible components, language support, and content structure.
 3. **Public site:** services, team, clinic details, contact, policies, and search metadata.
