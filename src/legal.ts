@@ -6,9 +6,9 @@ export const legalContent = {
       title: 'פרטיות',
       paragraphs: [
         'האתר מוצג על ידי VetStation וד״ר חכם אבו הוויג׳. לשאלות בנושא פרטיות אפשר לפנות אל vets.station@gmail.com.',
-        'האתר אינו כולל טופס הזמנה ואינו אוסף דרכו מידע רפואי על בעלי חיים. לחיצה על קישור טלפון, דוא״ל או אינסטגרם מעבירה אתכם לערוץ שבחרתם. המידע שתשלחו שם משמש למענה לפנייה ולתיאום ביקור, וכפוף גם לשירות שבו בחרתם להשתמש.',
-        'בחירת השפה נשמרת בדפדפן שלכם באמצעות אחסון מקומי. האתר אינו מפעיל כלי ניתוח התנהגות או עוגיות פרסום. ספק האחסון של האתר עשוי לעבד נתונים טכניים הדרושים להצגת האתר; פרטי הספק יושלמו לפני פרסום האתר.',
-        'לבקשת עיון, תיקון או מחיקה של מידע שמסרתם בפנייה, כתבו לכתובת הדוא״ל שלמעלה. מידע על זהות המפעיל המשפטי, מדיניות השמירה וספק האחסון יושלם לפני פרסום האתר.',
+        'האתר מאפשר לשלוח פנייה הכוללת שם, מספר טלפון, שם וסוג חיית המחמד, אזור מגורים וסוג הטיפול המבוקש. אין להזין מידע רפואי רגיש בטופס. הפרטים נשמרים במסד הנתונים עד 90 יום לצורך מענה ותיאום, ואז נמחקים אוטומטית. אפשר לבקש עיון, תיקון או מחיקה מוקדמת בדוא״ל. פניות בטלפון, בדוא״ל או באינסטגרם כפופות גם לתנאי השירות שבחרתם.',
+        'בחירת השפה נשמרת בדפדפן שלכם באמצעות אחסון מקומי. האתר אינו מפעיל כלי ניתוח התנהגות או עוגיות פרסום. Railway מאחסנת את האתר ואת נתוני הפנייה ומעבדת נתונים טכניים הדרושים להפעלתם.',
+        'האתר מתארח ב־Railway. הפנייה נשמרת עד 90 יום ונמחקת אוטומטית; לבקשת מחיקה מוקדמת אפשר לפנות בדוא״ל.',
       ],
     },
     accessibility: {
@@ -34,9 +34,9 @@ export const legalContent = {
       title: 'الخصوصية',
       paragraphs: [
         'يعرض هذا الموقع خدمات VetStation والدكتور حكم أبو هويج. للاستفسار عن الخصوصية، راسلونا على vets.station@gmail.com.',
-        'لا يحتوي الموقع على نموذج لحجز المواعيد ولا يجمع من خلاله معلومات طبية عن الحيوانات. عند الضغط على رابط الهاتف أو البريد الإلكتروني أو إنستغرام، تنتقلون إلى الوسيلة التي اخترتموها. تُستخدم المعلومات التي ترسلونها هناك للرد على استفساركم وتنسيق الزيارة، وتخضع أيضًا لشروط تلك الخدمة.',
-        'يُحفظ اختيار اللغة محليًا في متصفحكم. لا يستخدم الموقع أدوات تحليل سلوك الزوار أو ملفات تعريف ارتباط إعلانية. قد يعالج مزوّد الاستضافة بيانات تقنية لازمة لعرض الموقع؛ تُستكمل معلومات المزوّد قبل النشر.',
-        'لطلب الاطلاع على معلومات أرسلتموها أو تصحيحها أو حذفها، راسلونا على البريد الإلكتروني أعلاه. تُستكمل هوية المشغّل القانونية وفترة حفظ الرسائل وتفاصيل الاستضافة قبل النشر.',
+        'يتيح الموقع إرسال استفسار يتضمن الاسم ورقم الهاتف واسم الحيوان ونوعه والمنطقة ونوع الرعاية المطلوبة. يُرجى عدم إدخال معلومات طبية حساسة في النموذج. تُحفظ التفاصيل في قاعدة البيانات لمدة تصل إلى 90 يومًا للرد وتنسيق الزيارة، ثم تُحذف تلقائيًا. يمكن طلب الاطلاع عليها أو تصحيحها أو حذفها مبكرًا عبر البريد الإلكتروني. تخضع الرسائل الهاتفية والبريدية وإنستغرام أيضًا لشروط الخدمة المختارة.',
+        'يُحفظ اختيار اللغة محليًا في متصفحكم. لا يستخدم الموقع أدوات تحليل سلوك الزوار أو ملفات تعريف ارتباط إعلانية. تستضيف Railway الموقع وبيانات الاستفسارات وتعالج البيانات التقنية اللازمة لتشغيلهما.',
+        'تستضيف Railway الموقع. تُحفظ الطلبات حتى 90 يومًا ثم تُحذف تلقائيًا؛ لطلب حذف مبكر راسلونا بالبريد الإلكتروني.',
       ],
     },
     accessibility: {
@@ -62,9 +62,9 @@ export const legalContent = {
       title: 'Privacy',
       paragraphs: [
         'This website presents VetStation and Dr. Hakam Abu Hwaij. For privacy questions, email vets.station@gmail.com.',
-        'The website has no booking form and does not collect pet health details through a form. Phone, email and Instagram links open the channel you choose. Information you send through those channels is used to answer your inquiry and arrange a visit, and is also subject to that service’s terms.',
-        'Your language choice is stored locally in your browser. The site does not use visitor analytics or advertising cookies. The hosting provider may process technical data needed to deliver the site; provider details must be added before publication.',
-        'To ask about access, correction or deletion of information you sent, email the address above. The legal operator identity, message retention practice and hosting details must be completed before publication.',
+        'The inquiry form collects your name, phone number, pet name and type, area, requested service and a short note. Do not include sensitive medical information. Details are stored in the database for up to 90 days to respond and arrange care, then deleted automatically. You may request access, correction or earlier deletion by email. Phone, email and Instagram messages are also subject to the selected service’s terms.',
+        'Your language choice is stored locally in your browser. The site does not use visitor analytics or advertising cookies. Railway hosts the site and inquiry data and processes technical data needed to operate them.',
+        'The website is hosted by Railway. Inquiries are retained for up to 90 days and then deleted automatically; email us to request earlier deletion.',
       ],
     },
     accessibility: {

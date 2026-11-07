@@ -210,6 +210,22 @@ function render() {
               <a href="${instagramHref}" aria-label="${t.contact.instagramLabel}" target="_blank" rel="noopener noreferrer"><span class="contact-method-icon">${icons.instagram}</span><span><strong>${t.contact.instagram}</strong><bdi dir="ltr">@vets.station</bdi></span>${icons.arrow}</a>
               <p>${t.contact.availability}</p>
             </div>
+            <form class="inquiry-form reveal" id="inquiry-form">
+              <h3>${t.form.title}</h3>
+              <div class="inquiry-fields">
+                <label>${t.form.name}<input name="name" autocomplete="name" maxlength="100" required placeholder="${t.form.namePlaceholder}" /></label>
+                <label>${t.form.phone}<input name="phone" type="tel" autocomplete="tel" maxlength="32" required placeholder="${t.form.phonePlaceholder}" /></label>
+                <label>${t.form.petName}<input name="petName" maxlength="100" required placeholder="${t.form.petNamePlaceholder}" /></label>
+                <label>${t.form.petType}<select name="petType" required><option value="">${t.form.selectPetType}</option><option value="dog">${t.form.dog}</option><option value="cat">${t.form.cat}</option><option value="other">${t.form.other}</option></select></label>
+                <label>${t.form.area}<input name="area" autocomplete="address-level2" maxlength="120" required placeholder="${t.form.areaPlaceholder}" /></label>
+                <label>${t.form.service}<select name="service" required><option value="">${t.form.selectService}</option><option value="grooming">${t.form.grooming}</option><option value="vaccinations">${t.form.vaccinations}</option><option value="medical">${t.form.medical}</option><option value="other">${t.form.otherService}</option></select></label>
+                <label class="inquiry-message">${t.form.notes}<textarea name="message" rows="3" maxlength="1000" required placeholder="${t.form.notesPlaceholder}"></textarea></label>
+              </div>
+              <label class="inquiry-consent"><input type="checkbox" name="consent" required /><span>${t.form.consent}</span></label>
+              <label class="inquiry-trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+              <button class="button button-primary inquiry-submit" type="submit">${t.form.submit}</button>
+              <p class="inquiry-status" id="inquiry-status" role="status" aria-live="polite">${t.form.privacy}</p>
+            </form>
           </div>
         </section>
       </main>
@@ -232,6 +248,25 @@ function render() {
   const observers: IntersectionObserver[] = [];
   let frame = 0;
   disposePage = () => { controller.abort(); observers.forEach((observer) => { observer.disconnect(); }); cancelAnimationFrame(frame); };
+
+  const inquiryForm = mustGet<HTMLFormElement>('#inquiry-form');
+  const inquiryStatus = mustGet<HTMLElement>('#inquiry-status');
+  inquiryForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!inquiryForm.reportValidity()) return;
+    const button = mustGet<HTMLButtonElement>('button[type="submit"]', inquiryForm);
+    const data = new FormData(inquiryForm);
+    button.disabled = true;
+    inquiryStatus.textContent = t.form.sending;
+    try {
+      const response = await fetch('/api/inquiries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: data.get('name'), phone: data.get('phone'), petName: data.get('petName'), petType: data.get('petType'), area: data.get('area'), service: data.get('service'), message: data.get('message'), consent: data.get('consent') === 'on', website: data.get('website'), language: locale }) });
+      if (!response.ok) throw new Error(response.status === 429 ? t.form.tooMany : t.form.failure);
+      inquiryForm.reset();
+      inquiryStatus.textContent = t.form.success;
+    } catch (error) {
+      inquiryStatus.textContent = error instanceof Error ? error.message : t.form.failure;
+    } finally { button.disabled = false; }
+  }, { signal });
 
   document.querySelectorAll<HTMLButtonElement>('[data-locale]').forEach((button) => {
     button.addEventListener('click', () => {

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#f8f6f2" />
+    <title>VetStation · Owner inbox</title>
+    <style>
+      :root{font-family:Arial,sans-serif;color:#26313a;background:#f5f4f0;font-synthesis:none}*{box-sizing:border-box}body{margin:0;padding:clamp(18px,4vw,52px)}main{max-width:1180px;margin:auto}h1{font-size:clamp(28px,4vw,42px);margin:0 0 8px}p{color:#647078;line-height:1.6}.panel{background:#fff;border:1px solid #dedfdb;padding:clamp(18px,3vw,30px);margin-top:24px}form{display:flex;flex-wrap:wrap;align-items:end;gap:12px}label{display:grid;gap:7px;font-size:14px;font-weight:700}input,select,button{font:inherit;min-height:44px;padding:9px 12px;border:1px solid #c9cdca;background:white;color:inherit}button{cursor:pointer;background:#26313a;color:white;border-color:#26313a}button.secondary{background:white;color:#26313a}.message{min-height:24px;color:#7b394b}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #e1e2de}td{min-width:110px;line-height:1.5}td.message-cell{min-width:220px;max-width:340px;white-space:pre-wrap;overflow-wrap:anywhere}.muted{font-size:12px;color:#647078}#logout{float:right}@media(max-width:650px){body{padding:16px}form>*{width:100%}table,thead,tbody,tr,th,td{display:block}thead{position:absolute;width:1px;height:1px;overflow:hidden}tr{border:1px solid #dedfdb;margin:12px 0;padding:8px}td{border:0;padding:7px;min-width:0}td::before{content:attr(data-label);display:block;font-size:11px;color:#647078;font-weight:700;text-transform:uppercase}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <button class="secondary" id="logout" hidden>Log out</button>
+      <h1>VetStation owner inbox</h1>
+      <p>Customer requests are private. Contact the customer to confirm availability and a visit. Requests are automatically deleted after 90 days.</p>
+      <section class="panel" id="login-panel" aria-labelledby="login-title">
+        <h2 id="login-title">Sign in</h2>
+        <form id="login-form">
+          <label>Owner username<input name="username" autocomplete="username" required /></label>
+          <label>Owner password<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button type="submit">Open inbox</button>
+        </form>
+        <p class="message" id="login-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="panel" id="inbox-panel" hidden>
+        <form id="filter-form"><label>Show requests<select id="status-filter"><option value="new">New</option><option value="contacted">Contacted</option><option value="closed">Closed</option><option value="all">All</option></select></label><button type="submit">Refresh</button></form>
+        <p class="message" id="inbox-message" role="status" aria-live="polite"></p>
+        <div class="table-wrap"><table><thead><tr><th>Received</th><th>Customer</th><th>Pet</th><th>Area & service</th><th>Request</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inquiries"></tbody></table></div>
+      </section>
+    </main>
+    <script src="/admin.js" defer></script>
+  </body>
+</html>
