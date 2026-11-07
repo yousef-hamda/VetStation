@@ -186,8 +186,8 @@ async function handleApi(req, res, url) {
       const followUp = body.followUpAt === '' || body.followUpAt === null ? null : body.followUpAt;
       const validDate = !hasFollowUp || followUp === null || (typeof followUp === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(followUp) && !Number.isNaN(Date.parse(`${followUp}T00:00:00Z`)) && new Date(`${followUp}T00:00:00Z`).toISOString().slice(0, 10) === followUp);
       if (!['new', 'contacted', 'closed'].includes(status) || (hasNote && note === null) || !validDate) return json(res, 422, { error: 'Check the status, private note, and follow-up date.' });
-      const result = await pool.query(`UPDATE inquiries SET status=$2, internal_note=COALESCE($3, internal_note), follow_up_at=CASE WHEN $5 THEN $4 ELSE follow_up_at END,
-        contacted_at=CASE WHEN $2='contacted' AND contacted_at IS NULL THEN NOW() ELSE contacted_at END,
+      const result = await pool.query(`UPDATE inquiries SET status=$2::text, internal_note=COALESCE($3::text, internal_note), follow_up_at=CASE WHEN $5::boolean THEN $4::date ELSE follow_up_at END,
+        contacted_at=CASE WHEN $2::text='contacted' AND contacted_at IS NULL THEN NOW() ELSE contacted_at END,
         updated_at=NOW() WHERE id=$1 RETURNING id, status, internal_note, follow_up_at, contacted_at, updated_at`, [route[1], status, note, followUp, hasFollowUp]);
       return result.rowCount ? json(res, 200, result.rows[0]) : json(res, 404, { error: 'Inquiry not found.' });
     }
