@@ -38,8 +38,8 @@ html[lang="ar"] .eyebrow, html[lang="ar"] .section-label { letter-spacing: .015e
 
 .doctor-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .94fr); gap: clamp(48px, 6vw, 100px); }
 .doctor-media { display: block; width: 100%; max-width: none; }
-.doctor-film { width: auto; height: clamp(520px, 46vw, 640px); margin-inline-start: calc((min(100vw - 72px, 1280px) - 100vw) / 2); background: transparent; border: 0; box-shadow: none; }
-.doctor-film video { object-position: center; }
+.doctor-film { display: flex; justify-content: flex-end; width: auto; height: clamp(520px, 46vw, 640px); margin-inline-start: calc((min(100vw - 72px, 1280px) - 100vw) / 2); background: #f2f1ed; border: 0; box-shadow: none; }
+.doctor-film video { width: auto; max-width: 100%; height: 100%; object-fit: contain; object-position: center; mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent); mask-composite: intersect; }
 .doctor-film::after { content: ''; position: absolute; inset: 0 0 0 auto; width: 9%; background: linear-gradient(270deg, #f2f1ed, transparent); pointer-events: none; }
 
 
