@@ -2,3 +2,5 @@
 
 @media(min-width:701px){#search-label{grid-column:1;grid-row:1}#search{grid-column:1;grid-row:2}#filter-label{grid-column:2;grid-row:1}#status-filter{grid-column:2;grid-row:2}}
 .badges{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}.badge.due{background:#fff0d9;color:#704c15}
+
+html[lang="ar"] body{font-family:Tahoma,Arial,sans-serif}html[lang="ar"] .request-meta,html[lang="he"] .request-meta{font-size:13px}html[lang="ar"] .filters label,html[lang="he"] .filters label{font-size:13px}

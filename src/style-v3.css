@@ -36,10 +36,11 @@ html[lang="ar"] .eyebrow, html[lang="ar"] .section-label { letter-spacing: .015e
 .hero-video-wrap { border: 0; box-shadow: none; }
 .hero-video-wrap::after { width: 9%; }
 
-.doctor-grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); }
-.doctor-media { display: block; width: 100%; max-width: 470px; }
-.doctor-film { width: 100%; height: auto; aspect-ratio: 4 / 5; background: transparent; border: 0; box-shadow: none; -webkit-mask-image: radial-gradient(ellipse 58% 58% at center, #000 80%, transparent 100%); mask-image: radial-gradient(ellipse 58% 58% at center, #000 80%, transparent 100%); }
+.doctor-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .94fr); gap: clamp(48px, 6vw, 100px); }
+.doctor-media { display: block; width: 100%; max-width: none; }
+.doctor-film { width: auto; height: clamp(520px, 46vw, 640px); margin-inline-start: calc((min(100vw - 72px, 1280px) - 100vw) / 2); background: transparent; border: 0; box-shadow: none; }
 .doctor-film video { object-position: center; }
+.doctor-film::after { content: ''; position: absolute; inset: 0 0 0 auto; width: 9%; background: linear-gradient(270deg, #f2f1ed, transparent); pointer-events: none; }
 
 
 .doctor-film-footnote { padding-top: 11px; color: #667079; font-size: 10px; font-weight: 700; letter-spacing: .05em; }
@@ -134,8 +135,7 @@ html[dir="rtl"] .scroll-progress { left: auto; right: 0; }
 html[dir="rtl"] .primary-nav > a:not(.nav-cta)::after { transform-origin: right; }
 html[dir="rtl"] .hero-video-wrap { margin-right: 0; margin-left: calc((min(100vw - 72px, 1280px) - 100vw) / 2); }
 html[dir="rtl"] .hero-video-wrap::after { inset: 0 0 0 auto; background: linear-gradient(270deg, #f8f6f2, transparent); }
-html[dir="rtl"] .video-control { right: auto; left: 24px; }
-html[dir="rtl"] .doctor-film > .film-button { left: auto; right: 26px; }
+html[dir="rtl"] .doctor-film::after { inset: 0 auto 0 0; background: linear-gradient(90deg, #f2f1ed, transparent); }
 html[dir="rtl"] .faq-list details p { padding-right: 0; padding-left: 40px; }
 html[dir="rtl"] .legal-close { right: auto; left: 15px; }
 html[dir="rtl"] .hero h1 { letter-spacing: -.025em; }
@@ -156,6 +156,7 @@ html[dir="rtl"] .hero-meta span:last-child { text-align: end; }
 
 @media (max-width: 1120px) {
   html[dir="rtl"] .hero-video-wrap { margin-left: calc((min(100vw - 52px, 1280px) - 100vw) / 2); }
+  .doctor-film { margin-inline-start: calc((min(100vw - 52px, 1280px) - 100vw) / 2); }
   .services-grid { gap: 12px; }
   .service-copy { padding: 21px; }
 }
@@ -163,8 +164,9 @@ html[dir="rtl"] .hero-meta span:last-child { text-align: end; }
 @media (max-width: 900px) {
   .primary-nav { top: 76px; }
   .hero h1 { max-width: 680px; font-size: clamp(49px, 7vw, 68px); }
-  .doctor-grid { grid-template-columns: 1fr; }
-  .doctor-media { max-width: 590px; }
+  .doctor-grid { grid-template-columns: 1fr; gap: 46px; }
+  .doctor-media { max-width: none; }
+  .doctor-film { height: clamp(520px, 75vw, 700px); }
   .home-visit-grid { grid-template-columns: 1fr; }
   .home-visit-image { max-width: 760px; }
   .prep-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -180,9 +182,9 @@ html[dir="rtl"] .hero-meta span:last-child { text-align: end; }
   .hero-meta { margin-top: 32px; }
   .hero-meta span:last-child { max-width: 30%; }
   html[dir="rtl"] .hero-video-wrap { margin-left: calc((min(100vw - 40px, 1280px) - 100vw) / 2); }
-  .doctor-grid { gap: 40px; }
-  .doctor-media { max-width: 470px; }
-  .doctor-film::after { box-shadow: inset 0 0 14px 6px #f2f1ed; }
+  .doctor-grid { gap: 25px; }
+  .doctor-media { max-width: none; }
+  .doctor-film { height: clamp(350px, 92vw, 560px); margin-inline-start: calc((min(100vw - 40px, 1280px) - 100vw) / 2); }
   .services-grid { grid-template-columns: 1fr; gap: 13px; }
   .service-card { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); }
   .service-image { height: 100%; min-height: 168px; }
@@ -212,7 +214,7 @@ html[dir="rtl"] .hero-meta span:last-child { text-align: end; }
   .hero-meta { flex-direction: column; gap: 6px; font-size: 10px; }
   .hero-meta span:first-child, .hero-meta span:last-child { max-width: none; text-align: start; }
   html[dir="rtl"] .hero-video-wrap { margin-left: calc((min(100vw - 32px, 1280px) - 100vw) / 2); }
-  html[dir="rtl"] .video-control { left: 12px; }
+  .doctor-film { height: 360px; margin-inline-start: calc((min(100vw - 32px, 1280px) - 100vw) / 2); }
   .service-copy { padding: 14px; }
   .service-copy h3 { font-size: 15px; }
   .service-copy p { font-size: 11px; line-height: 1.65; }

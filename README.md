@@ -27,7 +27,7 @@ The browser checks and screenshots are recorded in [homepage QA](docs/homepage-q
 
 ## Production
 
-The Dockerfile builds the site and runs the Node server. Set `DATABASE_URL`, `REDIS_URL`, `INQUIRY_ADMIN_USER`, and `INQUIRY_ADMIN_PASSWORD` as Railway service variables. The server creates the inquiries table at startup and removes inquiries after `INQUIRY_RETENTION_DAYS` (default 90). Check `/api/health` for database and Redis connectivity. The owner inbox can read, update, and delete inquiries. Keep its password private.
+The Dockerfile builds the site and runs the Node server. Set `DATABASE_URL`, `REDIS_URL`, `INQUIRY_ADMIN_USER`, and `INQUIRY_ADMIN_PASSWORD` as Railway service variables. The server creates and updates the inquiries table at startup and removes inquiries after `INQUIRY_RETENTION_DAYS` (default 90). Check `/api/health` for database and Redis connectivity. The owner inbox can search and filter inquiries, mark progress, set private notes and follow-up dates, contact owners, export a CSV, and delete records. Keep its password private; the public site has no dashboard link.
 
 ## Release review
 

@@ -90,10 +90,6 @@ h1, h2, h3 { color: inherit; }
 .video-caption strong, .video-caption small { display: block; }
 .video-caption strong { font-size: 12px; letter-spacing: .09em; }
 .video-caption small { margin-top: 5px; color: #d2d8da; font-size: 9px; font-weight: 700; letter-spacing: .17em; }
-.video-control { position: absolute; right: 24px; bottom: 26px; z-index: 2; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(255,255,255,.65); padding: 0 13px; background: rgba(15,21,27,.56); color: white; font-size: 9px; font-weight: 800; letter-spacing: .12em; backdrop-filter: blur(6px); }
-.video-control:hover { background: rgba(15,21,27,.84); }
-.video-control-icon { width: 11px; height: 12px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
-.video-control.is-paused .video-control-icon, .film-button.is-paused .video-control-icon { width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 10px solid currentColor; border-right: 0; }
 .hero-side-note { display: block; margin-top: 16px; color: #788389; text-align: right; font-size: 9px; font-weight: 700; letter-spacing: .2em; }
 
 /* The vet */
@@ -103,9 +99,6 @@ h1, h2, h3 { color: inherit; }
 .doctor-media figure { min-width: 0; }
 .doctor-film { position: relative; min-width: 0; height: clamp(420px, 45vw, 590px); overflow: hidden; background: #d8d7d2; }
 .doctor-film video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
-.doctor-film-controls { position: absolute; z-index: 2; display: flex; flex-wrap: wrap; gap: 7px; left: 12px; bottom: 12px; }
-.film-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border: 1px solid rgba(255,255,255,.7); padding: 0 12px; background: rgba(23,30,38,.76); color: white; font-size: 9px; font-weight: 800; letter-spacing: .1em; backdrop-filter: blur(7px); }
-.film-button:hover { background: rgba(23,30,38,.94); }
 .doctor-film-label { position: absolute; z-index: 1; top: 14px; left: 15px; padding: 8px 10px; background: rgba(248,246,242,.88); color: var(--ink); font-size: 9px; font-weight: 800; letter-spacing: .12em; }
 .doctor-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .doctor-photo-secondary img { height: clamp(285px, 31vw, 405px); object-position: 50% 48%; }
@@ -225,7 +218,6 @@ h1, h2, h3 { color: inherit; }
   .hero-video-wrap { height: 545px; margin-right: calc((min(100vw - 52px, 1280px) - 100vw) / 2); }
   .doctor-grid, .visit-grid, .contact-grid { gap: 55px; }
   .video-caption { left: 20px; bottom: 23px; }
-  .video-control { right: 17px; bottom: 19px; }
 }
 
 @media (max-width: 900px) {
@@ -297,8 +289,6 @@ h1, h2, h3 { color: inherit; }
   .video-caption { left: 15px; bottom: 18px; gap: 8px; }
   .video-caption strong { font-size: 10px; }
   .video-caption small { font-size: 8px; }
-  .video-control { right: 12px; bottom: 16px; padding-inline: 10px; }
-  .video-control-text { display: none; }
   .doctor-film { height: 370px; }
   .doctor-photo-secondary img { height: 280px; }
   .visit-image { height: 430px; }

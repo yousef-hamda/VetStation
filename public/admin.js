@@ -73,7 +73,7 @@ function renderCard(item) {
 }
 function renderData(data) {
   renderStats(data.summary);
-  $('#result-count').textContent = `${data.total} ${t('count')}`;
+  $('#result-count').textContent = `${data.total} ${data.total === 1 ? { he: 'פנייה', ar: 'طلب', en: 'request' }[locale] : t('count')}`;
   $('#inquiries').replaceChildren(...(data.inquiries.length ? data.inquiries.map(renderCard) : [make('div','empty',t('noRequests'))]));
   $('#page-label').textContent = `${t('page')} ${data.page + 1} / ${Math.max(1,Math.ceil(data.total/data.pageSize))}`;
   $('#previous').disabled=data.page===0; $('#next').disabled=!data.hasMore;

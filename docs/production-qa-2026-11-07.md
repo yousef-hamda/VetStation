@@ -16,3 +16,9 @@ Target: `vetstation.net` on the VetStation service in the `vet station's Project
 - Confirm the published phone number has an active WhatsApp account. A visitor must press Send in WhatsApp; the website only prefills the message.
 - Confirm the registered business/operator details, veterinary licence and experience statement, rights to supplied media, and local legal/accessibility obligations. These cannot be verified from the code or deployment.
 - After launch, rotate the Railway and Cloudflare tokens shared in chat. Keep the owner-inbox password in Railway variables, separate from source control.
+
+## Owner workspace update
+
+- The `/admin` page is reached by typing its path; the public homepage has no dashboard link. An unauthenticated API request returned 401. The signed-in browser displayed the request summary, search, status filter, follow-up view, and request cards.
+- A synthetic request was created, shown in the dashboard, marked Contacted, given a private note and follow-up date, found through the due filter and search, then deleted through the dashboard. A separate API check verified server-side filtering, saved notes and dates, closing, CSV export, and spreadsheet-formula escaping. Synthetic records were removed after the checks.
+- Hebrew and Arabic dashboard labels and RTL direction were checked. At a 390 px viewport the request card and controls had no horizontal overflow. The public site's new doctor film matched the hero film's rendered width and height at 1440 px and 390 px in local preview; both visible pause controls were absent and the doctor film played on scroll.
