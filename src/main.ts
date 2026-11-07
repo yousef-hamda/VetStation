@@ -18,10 +18,21 @@ const phoneHref = 'tel:+972584458008';
 const email = 'vets.station@gmail.com';
 const emailHref = `mailto:${email}`;
 const instagramHref = 'https://www.instagram.com/vets.station?xtok=YnRrZmVvdnN6Y2Jn';
+const whatsappNumber = '972584458008';
+const whatsappCopy: Record<Locale, { button: string; channel: string; label: string; message: string }> = {
+  he: { button: 'שלחו הודעה', channel: 'וואטסאפ', label: 'שלחו הודעה ל־VetStation בוואטסאפ', message: 'שלום, איך אפשר לקבוע ביקור בית לחיית המחמד שלי?' },
+  ar: { button: 'أرسل رسالة', channel: 'واتساب', label: 'راسل VetStation عبر واتساب', message: 'مرحباً، كيف يمكنني حجز زيارة منزلية لحيواني الأليف؟' },
+  en: { button: 'Send a message', channel: 'WhatsApp', label: 'Message VetStation on WhatsApp', message: 'Hello, how can I book a home visit for my pet?' },
+};
+
+function whatsappHref(language: Locale) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappCopy[language].message)}`;
+}
 
 const icons = {
   arrow: '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   phone: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.2 3.5 4.6 5.2c-.9.6-1.2 1.8-.8 2.8 2.1 5.3 6.3 9.5 11.6 11.6 1 .4 2.2.1 2.8-.8l1.7-2.6-4.5-2.7-2 2c-2.4-1.1-4.2-2.9-5.3-5.3l2-2-2.9-4.7Z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.7L3 21l4.4-1.2A9 9 0 1 0 12 3Z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/><path d="M8.3 7.9c-.3.4-.6 1-.6 1.7 0 1.9 2.7 4.8 4.8 5.8 1.4.6 2.8.7 3.7.2.4-.2.9-1.1.9-1.5 0-.2-.2-.3-.5-.5l-1.8-.8c-.2-.1-.4 0-.5.2l-.8.9c-1.5-.5-2.6-1.6-3.3-3l.8-.7c.2-.2.2-.4.1-.6l-.8-1.9c-.2-.4-.5-.5-.8-.4-.4 0-.8.2-1.2.6Z" fill="currentColor"/></svg>',
   email: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.65"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/></svg>',
   instagram: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.65"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.65"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg>',
 };
@@ -53,9 +64,10 @@ function initialLocale(): Locale {
 let locale: Locale = initialLocale();
 let disposePage = () => {};
 
-function contactIconLinks(t: (typeof translations)['en'], className: string) {
+function contactIconLinks(t: (typeof translations)['en'], className: string, language: Locale) {
   return `<div class="${className}" aria-label="${t.nav.contact}">
     <a href="${phoneHref}" aria-label="${t.contact.phoneLabel}" title="${t.contact.phone}">${icons.phone}</a>
+    <a href="${whatsappHref(language)}" aria-label="${whatsappCopy[language].label}" title="${whatsappCopy[language].channel}" target="_blank" rel="noopener noreferrer">${icons.whatsapp}</a>
     <a href="${emailHref}" aria-label="${t.contact.emailLabel}" title="${t.contact.email}">${icons.email}</a>
     <a href="${instagramHref}" aria-label="${t.contact.instagramLabel}" title="${t.contact.instagram}" target="_blank" rel="noopener noreferrer">${icons.instagram}</a>
   </div>`;
@@ -110,7 +122,8 @@ function render() {
               <h1 id="hero-title">${t.hero.title}</h1>
               <p class="hero-lede">${t.hero.body}</p>
               <div class="hero-actions">
-                <a class="button button-primary" href="${phoneHref}">${icons.phone}${t.hero.primary}</a>
+                <a class="button button-primary hero-contact-button" href="${phoneHref}">${icons.phone}${t.hero.primary}</a>
+                <a class="button button-primary hero-contact-button" href="${whatsappHref(locale)}" aria-label="${whatsappCopy[locale].label}" target="_blank" rel="noopener noreferrer">${icons.whatsapp}${whatsappCopy[locale].button}</a>
                 <a class="text-link" href="#services">${t.hero.secondary}${icons.arrow}</a>
               </div>
               <p class="hero-meta"><span>${t.doctor.area}</span><span>${t.hero.caption}</span></p>
@@ -206,6 +219,7 @@ function render() {
             <div class="contact-copy reveal"><p class="section-label">${t.contact.eyebrow}</p><h2 id="contact-title">${t.contact.title}</h2><p>${t.contact.body}</p><p class="contact-note">${t.contact.note}</p></div>
             <div class="contact-methods reveal">
               <a href="${phoneHref}" aria-label="${t.contact.phoneLabel}"><span class="contact-method-icon">${icons.phone}</span><span><strong>${t.contact.phone}</strong><bdi dir="ltr">${phone}</bdi></span>${icons.arrow}</a>
+              <a href="${whatsappHref(locale)}" aria-label="${whatsappCopy[locale].label}" target="_blank" rel="noopener noreferrer"><span class="contact-method-icon">${icons.whatsapp}</span><span><strong>${whatsappCopy[locale].channel}</strong><bdi dir="ltr">${phone}</bdi></span>${icons.arrow}</a>
               <a href="${emailHref}" aria-label="${t.contact.emailLabel}"><span class="contact-method-icon">${icons.email}</span><span><strong>${t.contact.email}</strong><bdi dir="ltr">${email}</bdi></span>${icons.arrow}</a>
               <a href="${instagramHref}" aria-label="${t.contact.instagramLabel}" target="_blank" rel="noopener noreferrer"><span class="contact-method-icon">${icons.instagram}</span><span><strong>${t.contact.instagram}</strong><bdi dir="ltr">@vets.station</bdi></span>${icons.arrow}</a>
               <p>${t.contact.availability}</p>
@@ -234,7 +248,7 @@ function render() {
         <div class="container footer-main">
           <div class="footer-brand-block"><a class="brand footer-brand" href="#top"><span class="brand-mark"><img src="/assets/vetstation-logo-square.jpeg" alt="" width="58" height="58" loading="lazy" /></span><span class="brand-name">VET<span>STATION</span><small>${t.footer.tagline}</small></span><span class="sr-only">${t.common.backTop}</span></a><p>${t.doctor.area}</p></div>
           <div class="footer-links"><span>${t.footer.explore}</span><a href="#doctor">${t.nav.doctor}</a><a href="#services">${t.nav.services}</a><a href="#visit">${t.nav.visits}</a><a href="#questions">${t.nav.questions}</a></div>
-          <div class="footer-note"><span>${t.footer.contact}</span>${contactIconLinks(t, 'footer-social')}<a class="footer-phone" href="${phoneHref}"><bdi dir="ltr">${phone}</bdi></a><a href="${emailHref}"><bdi dir="ltr">${email}</bdi></a></div>
+          <div class="footer-note"><span>${t.footer.contact}</span>${contactIconLinks(t, 'footer-social', locale)}<a class="footer-phone" href="${phoneHref}"><bdi dir="ltr">${phone}</bdi></a><a href="${emailHref}"><bdi dir="ltr">${email}</bdi></a></div>
         </div>
         <div class="container footer-bottom"><span>${t.footer.copyright} <span id="year"></span> · ${t.footer.rights}</span><div class="footer-legal"><button type="button" data-legal="privacy">${legalContent[locale].privacy.title}</button><button type="button" data-legal="accessibility">${legalContent[locale].accessibility.title}</button><button type="button" data-legal="terms">${legalContent[locale].terms.title}</button></div><a href="#top">${t.footer.backTop} ↑</a></div>
       </footer>

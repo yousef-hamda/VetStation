@@ -28,6 +28,10 @@ html[lang="ar"] .eyebrow, html[lang="ar"] .section-label { letter-spacing: .015e
 .hero-meta span:first-child { max-width: 66%; }
 .hero-meta span:last-child { text-align: end; }
 .hero .button-primary svg { width: 18px; height: 18px; }
+.hero-actions { gap: 14px; }
+.hero-actions .hero-contact-button { flex: 1 1 calc(50% - 7px); max-width: 220px; min-width: 0; padding-inline: 10px; gap: 8px; font-size: 11px; }
+.hero-actions .hero-contact-button svg { flex: 0 0 18px; }
+.hero-actions .text-link { flex-basis: 100%; }
 .text-link svg { width: 18px; height: 18px; }
 .hero-video-wrap { border: 0; box-shadow: none; }
 .hero-video-wrap::after { width: 9%; }

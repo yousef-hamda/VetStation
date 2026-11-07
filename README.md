@@ -2,7 +2,7 @@
 
 A responsive, three-language website for Dr. Hakam Abu Hwaij’s veterinary home visits. Hebrew is the default; Arabic and English are available in the header. The site is built with Vite, TypeScript, and CSS.
 
-The homepage explains home visits and services, introduces Dr. Hakam, shows the supplied car illustration, answers common questions, and links directly to the phone, email, and Instagram. The contact form saves inquiries in PostgreSQL; Redis limits repeated submissions. The private owner inbox is at `/admin`. An inquiry does not confirm an appointment or provide emergency care. The doctor film starts when it comes into view and uses the five selected photos in a smooth 60 fps sequence. The hero clinic footage is unchanged.
+The homepage explains home visits and services, introduces Dr. Hakam, shows the supplied car illustration, answers common questions, and links directly to the phone, WhatsApp, email, and Instagram. WhatsApp opens with a short booking question in the selected website language. The contact form saves inquiries in PostgreSQL; Redis limits repeated submissions. The private owner inbox is at `/admin`. An inquiry does not confirm an appointment or provide emergency care. The doctor film starts when it comes into view and uses the five selected photos in a smooth 60 fps sequence. The hero clinic footage is unchanged.
 
 ## Run locally
 
