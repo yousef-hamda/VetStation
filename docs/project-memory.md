@@ -4,10 +4,10 @@ This file preserves durable facts and the user's working preferences across task
 
 ## Confirmed project state
 
-- Project: VetStation, currently a veterinary clinic website and operations platform in planning.
-- Repository has a local Vite/TypeScript homepage as of 2026-11-06. Direct phone, email, and Instagram links are the contact route; the site does not book, take payment, or collect patient details through a form.
-- The product inventory in `product-scope.md` is exploratory. The first release has not been selected.
-- The technical direction in `architecture.md` and `decisions.md` is a proposal. Framework and service providers are open.
+- Project: VetStation, a veterinary home-visit website live at https://vetstation.net and https://www.vetstation.net as of 2026-11-07.
+- Source: Vite/TypeScript frontend and Node server in this repository. The correct Railway project is `ca48a078-ae34-4786-9201-f794d2fc966f` in the `vet station's Projects` workspace. Its production services are VetStation, Postgres, and Redis. Cloudflare manages DNS. Do not deploy to the unrelated `yousef_hamda's Projects` workspace.
+- The homepage has direct phone, WhatsApp, email, and Instagram links plus an inquiry form. The form saves contact and pet request details in PostgreSQL; Redis limits repeated submissions. The owner inbox at `/admin` requires Railway-stored credentials. Inquiries are deleted after 90 days by the application. A submitted request does not confirm an appointment or take payment.
+- The product inventory in `product-scope.md` remains exploratory beyond this website. Do not treat older architecture proposals as the current deployment.
 
 ## User's working preferences (2026-11-06)
 
@@ -20,11 +20,11 @@ This file preserves durable facts and the user's working preferences across task
 
 ## Confirmed website brief
 
-The logo establishes VetStation and Dr. Hakam Abu Hwaij. He provides veterinary home visits, with more than five years of experience, travelling daily in Jerusalem, Haifa, and other areas by arrangement. There is no fixed clinic advertised. Service topics include grooming/haircuts, vaccinations, and assessment and care planning for injuries, skin problems, and infections, subject to what is appropriate at home. Contact channels are +972 58-445-8008, vets.station@gmail.com, and https://www.instagram.com/vets.station?xtok=YnRrZmVvdnN6Y2Jn. Hebrew is the initial language, with complete Arabic and English versions; Hebrew and Arabic are RTL.
+The logo establishes VetStation and Dr. Hakam Abu Hwaij. He provides veterinary home visits, with more than five years of experience, travelling daily in Jerusalem, Haifa, and other areas by arrangement. There is no fixed clinic advertised. Service topics include grooming/haircuts, vaccinations, and assessment and care planning for injuries, skin problems, and infections, subject to what is appropriate at home. Contact channels are +972 58-445-8008, WhatsApp at that same number, vets.station@gmail.com, and https://www.instagram.com/vets.station?xtok=YnRrZmVvdnN6Y2Jn. WhatsApp opens with a short booking question in the selected website language. Hebrew is the initial language, with complete Arabic and English versions; Hebrew and Arabic are RTL.
 
 The hero uses unchanged cat and dog clinic stock footage. The “Meet Dr. Hakam” section contains only a borderless, softly blended 60 fps film interleaving two supplied Hakam photos with three new animal-care photos. It starts automatically when in view, except for reduced-motion users, and preserves a visitor's manual pause. The separate visit photo stays out of that film. Service cards use three distinct action photos that are absent from both films. Switching language returns the visitor to the top hero and clears any section hash. The supplied car image is a generated illustration of the home-visit concept. The user requested calm music on by default, but the publicly prepared film is silent because current Israeli veterinary advertising rules prohibit ads containing a melody; local legal clearance is required before adding music. Do not publish the previous audio-bearing film.
 
-Open release facts: registered operator identity, veterinary licence and experience verification, permission for commercial use of supplied imagery, inquiry retention practice, accessibility arrangements, production host and domain. Do not invent them. Capture future briefs in `decisions.md` and the relevant scope documents.
+Open business facts to verify with the owner: registered operator identity, veterinary licence and experience statement, WhatsApp availability at the published number, commercial rights to supplied imagery, and any additional accessibility arrangements. The production host, domain, and inquiry retention are now configured. Never store Railway or Cloudflare tokens in the repository or project memory; rotate previously shared tokens after use.
 
 ## Memory maintenance
 
