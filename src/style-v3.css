@@ -38,10 +38,10 @@ html[lang="ar"] .eyebrow, html[lang="ar"] .section-label { letter-spacing: .015e
 
 .doctor-grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); }
 .doctor-media { display: block; width: 100%; max-width: 470px; }
-.doctor-film { width: 100%; height: auto; aspect-ratio: 4 / 5; background: #f2f1ed; }
+.doctor-film { width: 100%; height: auto; aspect-ratio: 4 / 5; background: transparent; border: 0; box-shadow: none; -webkit-mask-image: radial-gradient(ellipse 58% 58% at center, #000 80%, transparent 100%); mask-image: radial-gradient(ellipse 58% 58% at center, #000 80%, transparent 100%); }
 .doctor-film video { object-position: center; }
-.doctor-film::after { content: ''; position: absolute; inset: 0; z-index: 1; box-shadow: inset 0 0 18px 8px #f2f1ed; pointer-events: none; }
-.doctor-film > .film-button { position: absolute; left: 26px; bottom: 24px; z-index: 2; }
+
+
 .doctor-film-footnote { padding-top: 11px; color: #667079; font-size: 10px; font-weight: 700; letter-spacing: .05em; }
 .doctor-copy h2 { max-width: 640px; }
 .doctor-rule { justify-content: flex-start; line-height: 1.55; }

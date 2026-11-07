@@ -133,7 +133,6 @@ function render() {
                 <video id="hero-video" class="hero-video" poster="/assets/hero-clinic-poster.jpg" width="1280" height="720" muted loop playsinline preload="metadata" aria-label="${t.hero.videoAlt}">
                   <source src="/assets/hero-clinic.mp4" type="video/mp4" />
                 </video>
-                <button class="video-control" id="video-control" type="button" aria-label="${t.media.play} — ${t.hero.videoAlt}"><span class="video-control-icon" aria-hidden="true"></span><span class="video-control-text">${t.media.play}</span></button>
               </div>
             </div>
           </div>
@@ -146,7 +145,6 @@ function render() {
                 <video id="doctor-video" poster="/assets/doctor-film-v4-poster.jpg" width="800" height="1000" muted loop playsinline preload="metadata" aria-label="${t.doctor.filmAlt}">
                   <source src="/assets/doctor-film-v4.mp4" type="video/mp4" />
                 </video>
-                <button class="film-button is-paused" id="doctor-video-control" type="button" aria-label="${t.media.play} — ${t.doctor.filmAlt}"><span class="video-control-icon" aria-hidden="true"></span><span class="doctor-video-control-text">${t.media.play}</span></button>
               </div>
               <p class="doctor-film-footnote">${t.doctor.filmCaption}</p>
             </div>
@@ -322,53 +320,24 @@ function render() {
 
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const heroVideo = mustGet<HTMLVideoElement>('#hero-video');
-  const heroControl = mustGet<HTMLButtonElement>('#video-control');
   const doctorVideo = mustGet<HTMLVideoElement>('#doctor-video');
-  const doctorControl = mustGet<HTMLButtonElement>('#doctor-video-control');
-  let heroManuallyPaused = false;
-  let doctorManuallyPaused = false;
-
-  function syncControl(video: HTMLVideoElement, button: HTMLButtonElement, textSelector: string, playLabel: string, pauseLabel: string) {
-    const paused = video.paused;
-    button.classList.toggle('is-paused', paused);
-    button.setAttribute('aria-label', paused ? playLabel : pauseLabel);
-    mustGet<HTMLElement>(textSelector, button).textContent = paused ? t.media.play : t.media.pause;
+  async function playVideo(video: HTMLVideoElement) { try { await video.play(); } catch { /* The poster remains available if autoplay is blocked. */ } }
+  function visible(video: HTMLVideoElement) { const box = video.getBoundingClientRect(); return box.top < innerHeight && box.bottom > 0; }
+  function syncVideos() {
+    for (const video of [heroVideo, doctorVideo]) {
+      if (!document.hidden && !reducedMotion.matches && visible(video)) void playVideo(video);
+      else video.pause();
+    }
   }
-  const syncHero = () => syncControl(heroVideo, heroControl, '.video-control-text', `${t.media.play} — ${t.hero.videoAlt}`, `${t.media.pause} — ${t.hero.videoAlt}`);
-  const syncDoctor = () => syncControl(doctorVideo, doctorControl, '.doctor-video-control-text', `${t.media.play} — ${t.doctor.filmAlt}`, `${t.media.pause} — ${t.doctor.filmAlt}`);
-  async function playHero() { try { await heroVideo.play(); } catch { /* The poster remains available. */ } syncHero(); }
-  async function playDoctor() { try { await doctorVideo.play(); } catch { /* The poster remains available. */ } syncDoctor(); }
-  heroControl.addEventListener('click', () => {
-    if (heroVideo.paused) { heroManuallyPaused = false; void playHero(); }
-    else { heroManuallyPaused = true; heroVideo.pause(); }
-    syncHero();
-  }, { signal });
-  doctorControl.addEventListener('click', () => {
-    if (doctorVideo.paused) { doctorManuallyPaused = false; void playDoctor(); }
-    else { doctorManuallyPaused = true; doctorVideo.pause(); }
-    syncDoctor();
-  }, { signal });
-  heroVideo.addEventListener('play', syncHero, { signal });
-  heroVideo.addEventListener('pause', syncHero, { signal });
-  doctorVideo.addEventListener('play', syncDoctor, { signal });
-  doctorVideo.addEventListener('pause', syncDoctor, { signal });
-  heroVideo.addEventListener('error', () => { heroControl.hidden = true; }, { signal });
-  doctorVideo.addEventListener('error', () => { doctorControl.hidden = true; }, { signal });
-  syncHero();
-  syncDoctor();
   if ('IntersectionObserver' in window) {
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting && !heroManuallyPaused && !reducedMotion.matches && !document.hidden) void playHero();
-      else heroVideo.pause();
-    }, { threshold: 0.15 });
-    heroObserver.observe(heroVideo);
-    observers.push(heroObserver);
-    const doctorObserver = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting && !doctorManuallyPaused && !reducedMotion.matches && !document.hidden) void playDoctor();
-      else doctorVideo.pause();
-    }, { threshold: 0.15 });
-    doctorObserver.observe(doctorVideo);
-    observers.push(doctorObserver);
+    for (const video of [heroVideo, doctorVideo]) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry?.isIntersecting && !reducedMotion.matches && !document.hidden) void playVideo(video);
+        else video.pause();
+      }, { threshold: 0.15 });
+      observer.observe(video);
+      observers.push(observer);
+    }
     if (!reducedMotion.matches) {
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -378,21 +347,9 @@ function render() {
       document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => { element.classList.add('will-reveal'); revealObserver.observe(element); });
       observers.push(revealObserver);
     }
-  } else if (!reducedMotion.matches) void playHero();
-  reducedMotion.addEventListener('change', (event) => {
-    if (event.matches) { heroVideo.pause(); doctorVideo.pause(); }
-    else {
-      if (!heroManuallyPaused && heroVideo.getBoundingClientRect().bottom > 0) void playHero();
-      if (!doctorManuallyPaused && doctorVideo.getBoundingClientRect().top < innerHeight && doctorVideo.getBoundingClientRect().bottom > 0) void playDoctor();
-    }
-  }, { signal });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { heroVideo.pause(); doctorVideo.pause(); }
-    else if (!reducedMotion.matches) {
-      if (!heroManuallyPaused && heroVideo.getBoundingClientRect().bottom > 0) void playHero();
-      if (!doctorManuallyPaused && doctorVideo.getBoundingClientRect().top < innerHeight && doctorVideo.getBoundingClientRect().bottom > 0) void playDoctor();
-    }
-  }, { signal });
+  } else syncVideos();
+  reducedMotion.addEventListener('change', syncVideos, { signal });
+  document.addEventListener('visibilitychange', syncVideos, { signal });
 
   const heroSection = mustGet<HTMLElement>('.hero');
   function updateScroll() {
